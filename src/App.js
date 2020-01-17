@@ -3,12 +3,6 @@ import './App.css';
 import dashbord from "./components/dashbord/dashbord";
 import filter from "./components/filter/filter";
 import form from "./components/form/form";
-import {
-  ReactDadata
-} from 'react-dadata';
-import ReactDadataBox from 'react-dadata-box';
-import DadataSuggestions from 'react-dadata-suggestions';
-import "react-dadata-suggestions/dist/styles.css";
 
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 // If you want to use the provided css
