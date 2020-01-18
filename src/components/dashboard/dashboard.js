@@ -11,17 +11,20 @@ function dashboard(props) {
     pressure: 752,
     icon: ''
   }
+
+    let data2 = {
+    city: "Санкт-Петербург",
+    temperature: -3,
+    wind: 7,
+    pressure: 732,
+    icon: ''
+  }
+
   return (
     <div className="dashboard">
-      <div className="box" >
-        <Card data={data}/>
-      </div>
-      <div className="box" >
-        <Card data={data}/>
-      </div>
-      <div className="box" >
-        <Card data={data}/>
-      </div>
+      <Card data={data}/>
+      <Card data={data2}/>
+      <Card data={data}/>
     </div>
   );
 }

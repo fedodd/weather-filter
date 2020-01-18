@@ -1,4 +1,4 @@
 .dashboard {
-  width: 500px;
-  height: 300px;
+  display: flex;
+  margin-left: calc(var(--padding-middle)*(-1));
 }

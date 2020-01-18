@@ -20,11 +20,10 @@ class form extends Component {
 
     return (
       <form className='form'>
-        <div className="box">
-          <GooglePlacesAutocomplete
+        <GooglePlacesAutocomplete
           onSelect={event => console.log(event)}
           placeholder={this.state.placeholder}
-          inputClassName="input"
+          inputClassName="input with__border"
           autocompletionRequest={this.state.autocompletionRequest}
           renderSuggestions={(active, suggestions, onSelectSuggestion) => (
             <div className="suggestions-container">
@@ -36,10 +35,7 @@ class form extends Component {
                     description: descr
                   }
                   return (
-                  <div
-                    className="suggestion"
-                      onClick={(event) => onSelectSuggestion(updatedSugg, event)}
-                  >
+                  <div className="suggestion" onClick={(event) => onSelectSuggestion(updatedSugg, event)}>
                     {descr}
                   </div>
                 )})
@@ -47,13 +43,7 @@ class form extends Component {
             </div>
           )}
         />
-        </div>
-        <div className="box">
-          <button type="submit" className="submit">+</button>
-        </div>
-
-
-        {/* <Button className="button"/> */}
+        <button type="submit" className="submit"><span className="button  with__border"></span></button>
       </form>
     );
   }
