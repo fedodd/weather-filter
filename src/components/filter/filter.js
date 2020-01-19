@@ -38,7 +38,7 @@ class filter extends Component {
                   display: 'flex',
                   width: '100%'
                 }}
-              >
+              ><span></span>
                 <div
                   ref={props.ref}
                   style={{
@@ -59,17 +59,19 @@ class filter extends Component {
             )}
             renderThumb={({ props, isDragged }) => (
               <div
+                className="thumb"
                 {...props}
                 style={{
                   ...props.style,
                   height: isDragged ? '20px' :'16px',
                   width: isDragged ? '10px' : '8px',
-                  borderRadius: isDragged ? '5px' : '4px',
+                  borderRadius: isDragged ? '6px' : '5px',
                   backgroundColor: isDragged ?  'var(--color_active)': 'var(--color_dark)',
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
-                  border: '1px solid white'
+                  border: '1px solid white',
+                  outlineColor: isDragged ?  'transparent': 'var(--color_dark)'
                 }}
               >
               </div>

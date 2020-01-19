@@ -7,3 +7,7 @@
   font-weight: normal;
   text-align: left;
 }
+
+.thumb:focus {
+  outline-color: pink;
+}
