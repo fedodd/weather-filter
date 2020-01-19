@@ -1,11 +1,11 @@
 import React from 'react';
 
-function dashbord(props) {
+function button(props) {
   return (
     <div>
-
+      +
     </div>
   );
 }
 
-export default dashbord;
+export default button;

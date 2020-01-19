@@ -1,0 +1,78 @@
+.form {
+  display: flex;
+  flex-direction: row;
+  margin-right: 100px;
+}
+
+.input {
+  display: inline-block;
+  font-size: var(--font-size_big);
+  height: 60px;
+  width: 300px;
+  box-sizing: border-box;
+  padding-left: 22px;
+}
+
+.input:focus {
+  border-color: var(--color_active);
+  outline: none;
+}
+
+.submit {
+  display: inline-block;
+  position: relative;
+  width: 60px;
+  height: 60px;
+  background-color: #fff;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  margin-left: 6px;
+  font-size: 0;
+  outline: none;
+}
+
+.submit:hover {
+  cursor: pointer;
+}
+
+.submit:hover .button,
+.submit:focus .button {
+  border-color: var(--color_active);
+}
+
+.button {
+  display: inline-block;
+  position: relative;
+  width: 60px;
+  height: 60px;
+
+  cursor: pointer;
+}
+
+.button:before, .button:after {
+  position: absolute;
+  z-index: 10;
+  content: ' ';
+  background-color: var(--color_main);
+}
+
+
+.button:hover:before,
+.button:hover:after {
+  background-color: var(--color_active);
+}
+
+/* выравниваем по центру кнопки 60 на 60*/
+.button:before {
+  left: calc(11px + 17px);
+  top: calc(0px + 17px);
+  height: 25px;
+  width: 3px;
+}
+.button:after {
+  left: calc(0px + 17px);
+  top: calc(11px + 17px);
+  height: 3px;
+  width: 25px;
+}
