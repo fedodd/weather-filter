@@ -22,7 +22,7 @@ class form extends Component {
     console.log('a am here');
 
     axios.get('/http://api.weatherbit.io/v2.0/current?city=London&key=70b14df4c065478e8ab5dfeb04ed8c83', {
-
+        city: 'London'
       })
       .then(function (response) {
         console.log(response);

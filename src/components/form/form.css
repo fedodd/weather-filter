@@ -2,6 +2,10 @@
   display: flex;
   flex-direction: row;
   margin-right: 100px;
+
+  & .suggestions-container {
+    background-color: red;
+  }
 }
 
 .input {
