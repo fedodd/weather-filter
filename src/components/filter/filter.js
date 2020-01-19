@@ -6,11 +6,9 @@ class filter extends Component {
   state = {
     values: [10],
     finalValues: [10],
-    step: 0.1,
+    step: 1,
     min: -30,
-    max: 40,
-    thumbStyle: {
-    }
+    max: 40
   };
 
 
@@ -36,7 +34,7 @@ class filter extends Component {
                 onTouchStart={props.onTouchStart}
                 style={{
                   ...props.style,
-                  height: '36px',
+                  height: '20px',
                   display: 'flex',
                   width: '100%'
                 }}
@@ -44,12 +42,11 @@ class filter extends Component {
                 <div
                   ref={props.ref}
                   style={{
-                    height: '5px',
+                    height: '3px',
                     width: '100%',
-                    borderRadius: '4px',
                     background: getTrackBackground({
                       values: this.state.values,
-                      colors: ['#548BF4', '#ccc'],
+                      colors: ['var(--color_light)', 'var(--color_dark)'],
                       min: this.state.min,
                       max: this.state.max
                     }),
@@ -65,28 +62,21 @@ class filter extends Component {
                 {...props}
                 style={{
                   ...props.style,
-                  height: '42px',
-                  width: '42px',
-                  borderRadius: '4px',
-                  backgroundColor: '#FFF',
+                  height: isDragged ? '20px' :'16px',
+                  width: isDragged ? '10px' : '8px',
+                  borderRadius: isDragged ? '5px' : '4px',
+                  backgroundColor: isDragged ?  'var(--color_active)': 'var(--color_dark)',
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
-                  boxShadow: '0px 2px 6px #AAA'
+                  border: '1px solid white'
                 }}
               >
-                <div
-                  style={{
-                    height: '16px',
-                    width: '5px',
-                    backgroundColor: isDragged ? '#548BF4' : '#CCC'
-                  }}
-                />
               </div>
             )}
           />
-          <output style={{ marginTop: '30px' }} id="output">
-            {this.state.values[0].toFixed(1)}
+          <output id="output">
+            {this.state.values[0]} &#176;C
           </output>
         </div>
       </div>

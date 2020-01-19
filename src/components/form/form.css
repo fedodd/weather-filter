@@ -14,7 +14,7 @@
 }
 
 .input:focus {
-  border-color: black;
+  border-color: var(--color_active);
   outline: none;
 }
 
@@ -38,7 +38,7 @@
 
 .submit:hover .button,
 .submit:focus .button {
-  border-color: black;
+  border-color: var(--color_active);
 }
 
 .button {
@@ -60,7 +60,7 @@
 
 .button:hover:before,
 .button:hover:after {
-  background-color: black;
+  background-color: var(--color_active);
 }
 
 /* выравниваем по центру кнопки 60 на 60*/

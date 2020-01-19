@@ -67,7 +67,7 @@
 
 .card-close:hover:before,
 .card-close:hover:after {
-  background-color: black;
+  background-color: var(--color_active);
 }
 
 
