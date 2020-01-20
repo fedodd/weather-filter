@@ -3,11 +3,14 @@ import "./card.pcss";
 
 function card(props) {
 
+  console.log('card', props);
+
+
   return (
     <div className="card with__border">
       <span className="card-close"></span>
       <h3 className="card-title">
-        {props.data.city}
+        {props.data.title}
       </h3>
       <div className="card-line">
         <div className="card-icon">{props.data.icon}</div>

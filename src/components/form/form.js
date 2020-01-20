@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios  from 'axios';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
-import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
+import { geocodeByAddress, getLatLng, geocodeByPlaceId } from 'react-google-places-autocomplete';
 // If you want to use the provided css
 import 'react-google-places-autocomplete/dist/assets/index.css';
 import Button from "../button/button";
@@ -16,23 +16,32 @@ class form extends Component {
       componentRestrictions: {
         country: 'ru'
       },
-       types: ['(cities)'],
+      types: ['(cities)'],
     },
     currentCity: {
       lat: null,
-      lng: null
+      lng: null,
+      title: null,
+      place_id: null
     },
     weather: null
   }
 
   onSelectCity(event) {
+   console.log(event);
 
-    geocodeByAddress(event.descripiton)
-      .then(results => getLatLng(results[0]))
+
+    geocodeByPlaceId(event.place_id)
+      .then(results => {
+        console.log(results);
+        return getLatLng(results[0])})
       .then(({ lat, lng }) =>
         this.setState({
           currentCity: {
-            lat, lng
+            lat, lng,
+            title: event.structured_formatting.main_text,
+            id: event.place_id,
+            country: event.structured_formatting.secondary_text
           }
         })
       );
@@ -54,12 +63,14 @@ class form extends Component {
       .then(response => {
 
         let data = response.data.data[0];
-        let pressure = Math.round(data.pres * 0, 750062);
+        // convert to mm Hg
+        let pressure = Math.round(data.pres * 0.750062);
 
         let city = {
+          title: this.state.currentCity.title,
           city_name: data.city_name,
-          temperature: data.temp,
-          wind: data.wind_spd,
+          temperature: Math.round(data.temp),
+          wind: Math.round(data.wind_spd),
           pressure: pressure,
           icon: data.weather.icon,
           isHide: false

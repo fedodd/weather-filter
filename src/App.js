@@ -1,9 +1,11 @@
+import { hot } from 'react-hot-loader/root';
 import React, { Component } from 'react';
+import { Provider, connect} from 'react-redux';
 import './App.pcss';
 import Dashboard from "./components/dashboard/dashboard";
 import Filter from "./components/filter/filter";
 import Form from "./components/form/form";
-import { hot } from 'react-hot-loader/root';
+
 import {
   createStore,
   applyMiddleware
@@ -23,6 +25,8 @@ class App extends Component {
   }
 
   render() {
+    console.log('i am render');
+
     return (
       <div className="App">
         <header className="App-header">
@@ -32,10 +36,27 @@ class App extends Component {
           <Form />
           <Filter />
         </div>
-        <Dashboard />
+        <Dashboard cities={this.props.cities}/>
       </div>
     );
   }
 }
 
-export default hot(App);
+function mapStateToProps(state) {
+  return {
+    cities: state.cities
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addCity: (city) => dispatch(
+      actions.addCity(city))
+  };
+}
+
+const connectedApp = connect(
+  mapStateToProps, mapDispatchToProps
+)(App);
+
+export default hot(connectedApp);
