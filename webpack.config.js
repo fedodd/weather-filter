@@ -77,9 +77,11 @@ const config = {
   plugins: [
     new LodashModuleReplacementPlugin,
     new HtmlWebpackPlugin({
-      template: require('html-webpack-template'),
       inject: false,
+      template: require('html-webpack-template'),
+      links: ['https://fonts.googleapis.com/css?family=Open+Sans&display=swap'],
       appMountId: 'app',
+      scripts: ['https://maps.googleapis.com/maps/api/js?key=AIzaSyDYDyRJMJLyYF9fIpH51XZLaOt5mF9pyDY&libraries=places']
     })
   ],
   optimization: {
