@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Range, getTrackBackground } from 'react-range';
-import './filter.css'
+import './filter.pcss'
 
 class filter extends Component {
   state = {

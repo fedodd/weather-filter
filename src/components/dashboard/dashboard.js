@@ -1,5 +1,5 @@
 import React from 'react';
-import "./dashboard.css";
+import "./dashboard.pcss";
 import Card from "../card/card";
 
 function dashboard(props) {

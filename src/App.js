@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.pcss';
 import Dashboard from "./components/dashboard/dashboard";
 import Filter from "./components/filter/filter";
 import Form from "./components/form/form";
+import { hot } from 'react-hot-loader/root';
 
 class App extends Component {
 
@@ -27,9 +28,11 @@ class App extends Component {
           <Filter />
         </div>
         <Dashboard />
+
       </div>
+
     );
   }
 }
 
-export default App;
+export default hot(App);

@@ -1,0 +1,79 @@
+.card {
+  position: relative;
+  margin-bottom: var(--padding-middle);
+  margin-left: var(--padding-middle);
+  padding: var(--padding-small);
+  width: 182px;
+  height: 135px;
+  text-align: left;
+}
+
+.card-title {
+  margin: 0;
+  margin-bottom: var(--padding-small); /* need 10px,   */
+  font-size: var(--font-size_title_small);
+  font-weight: bold;
+}
+
+.card-line {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--padding-smaller);
+  font-size: var(--font-size_big);
+}
+
+.card-icon {
+  display: inline-block;
+  margin-right: var(--padding-small);
+  width: 46px;
+  height: 46px;
+  font-size: var(--font-size_big);
+  background-color: green;
+}
+
+.card-text {
+  margin: 0;
+  font-size: var(--font-size_text);
+}
+
+.card-close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+}
+
+.card-close:hover {
+  cursor: pointer;
+}
+
+.card-icon:hover {
+  cursor: pointer;
+}
+
+.card-close:before, .card-close:after {
+  position: absolute;
+  top: 1px;
+  left: 9px;
+  z-index: 10;
+  width: 1px;
+  height: 18px;
+  background-color: var(--color_main);
+  content: ' ';
+}
+
+
+.card-close:hover:before,
+.card-close:hover:after {
+  background-color: var(--color_active);
+}
+
+
+.card-close:before {
+  transform: rotate(45deg);
+}
+.card-close:after {
+  transform: rotate(-45deg);
+}
