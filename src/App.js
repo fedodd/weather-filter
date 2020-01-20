@@ -28,7 +28,6 @@ class App extends Component {
           <Filter />
         </div>
         <Dashboard />
-
       </div>
 
     );

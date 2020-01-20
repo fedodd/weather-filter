@@ -79,6 +79,7 @@ const config = {
     new HtmlWebpackPlugin({
       inject: false,
       template: require('html-webpack-template'),
+      title: 'weather-filter',
       links: ['https://fonts.googleapis.com/css?family=Open+Sans&display=swap'],
       appMountId: 'app',
       scripts: ['https://maps.googleapis.com/maps/api/js?key=AIzaSyDYDyRJMJLyYF9fIpH51XZLaOt5mF9pyDY&libraries=places']

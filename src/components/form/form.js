@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios  from 'axios';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
-
+import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
 // If you want to use the provided css
 import 'react-google-places-autocomplete/dist/assets/index.css';
 import Button from "../button/button";
@@ -15,30 +15,56 @@ class form extends Component {
         country: 'ru'
       },
        types: ['(cities)'],
-    }
+    },
+    currentCity: {
+      lat: null,
+      lng: null
+    },
+    weather: null
   }
 
   onSelectCity(event) {
-    console.log('a am here');
 
-    axios.get('/http://api.weatherbit.io/v2.0/current?city=London&key=70b14df4c065478e8ab5dfeb04ed8c83', {
-        city: 'London'
+    geocodeByAddress(event.descripiton)
+      .then(results => getLatLng(results[0]))
+      .then(({ lat, lng }) =>
+        this.setState({
+          currentCity: {
+            lat, lng
+          }
+        })
+      );
+
+
+  }
+
+  onSubmit(event){
+
+    event.preventDefault();
+
+    axios.get('https://api.weatherbit.io/v2.0/current', {
+        params: {
+          lat: this.state.currentCity.lat,
+          lon: this.state.currentCity.lng,
+          key: '70b14df4c065478e8ab5dfeb04ed8c83'
+        }
       })
-      .then(function (response) {
-        console.log(response);
+      .then(response => {
+
+        this.setState({
+          weather: response.data.data[0]
+        });
+        console.log(response.data, this.state);
       })
-      .catch(function (error) {
+      .catch(error => {
         console.log(error);
       })
-      .finally(function () {
-        // always executed
-      });
   }
 
   render() {
 
     return (
-      <form className='form'>
+      <form className='form' onSubmit={e => this.onSubmit(e)}>
         <GooglePlacesAutocomplete
           onSelect={event => this.onSelectCity(event)}
           placeholder={this.state.placeholder}
@@ -59,7 +85,11 @@ class form extends Component {
             </div>
           )}
         />
-        <button type="submit" className="submit"><span className="button  with__border"></span></button>
+        <button
+          type="submit"
+          className="submit">
+          <span className="button  with__border"></span>
+        </button>
       </form>
     );
   }
