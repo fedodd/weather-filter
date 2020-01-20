@@ -6,6 +6,8 @@ import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
 import 'react-google-places-autocomplete/dist/assets/index.css';
 import Button from "../button/button";
 import './form.pcss';
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions';
 
 class form extends Component {
   state = {
@@ -51,10 +53,20 @@ class form extends Component {
       })
       .then(response => {
 
-        this.setState({
-          weather: response.data.data[0]
-        });
-        console.log(response.data, this.state);
+        let data = response.data.data[0];
+        let pressure = Math.round(data.pres * 0, 750062);
+
+        let city = {
+          city_name: data.city_name,
+          temperature: data.temp,
+          wind: data.wind_spd,
+          pressure: pressure,
+          icon: data.weather.icon,
+          isHide: false
+        }
+
+        this.props.addCity(city);
+
       })
       .catch(error => {
         console.log(error);
@@ -95,4 +107,19 @@ class form extends Component {
   }
 }
 
-export default form;
+function mapStateToProps(state) {
+  return {
+    cities: state.cities
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addCity: (city) => dispatch(
+      actions.addCity(city))
+  };
+}
+
+export default connect(
+  mapStateToProps, mapDispatchToProps
+)(form);

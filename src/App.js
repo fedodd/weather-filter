@@ -4,6 +4,11 @@ import Dashboard from "./components/dashboard/dashboard";
 import Filter from "./components/filter/filter";
 import Form from "./components/form/form";
 import { hot } from 'react-hot-loader/root';
+import {
+  createStore,
+  applyMiddleware
+} from 'redux';
+import createSagaMiddleware from 'redux-saga';
 
 class App extends Component {
 
@@ -29,7 +34,6 @@ class App extends Component {
         </div>
         <Dashboard />
       </div>
-
     );
   }
 }
