@@ -27,8 +27,6 @@ const reducer = (state = initialState, action) => {
         cities: afterDeleteCities
       };
     case 'FILTER_CITY':
-
-
       // eslint-disable-next-line no-case-declarations
       let filteredCities = state.cities.map(city => {
         (city.temperature < action.temperature) ?
@@ -37,6 +35,7 @@ const reducer = (state = initialState, action) => {
       });
       return {
         ...state,
+        filteredCities
 
       };
     default:

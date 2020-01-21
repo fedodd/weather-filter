@@ -3,9 +3,6 @@ import "./card.pcss";
 
 function card(props) {
 
-  console.log('card', props);
-
-
   return (
     <div className="card with__border">
       <span className="card-close" onClick={event=> props.onCardClose(props.data.city_name)}></span>

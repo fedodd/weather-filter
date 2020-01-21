@@ -4,8 +4,6 @@ import Card from "../card/card";
 
 function dashboard(props) {
 
-  console.log('a em here', props);
-
   let cards = <p>Добавьте город для отлеживания температуры</p>;
 
   if (props.cities) {
@@ -15,7 +13,6 @@ function dashboard(props) {
         key={city.id}
         onCardClose={props.onCardClose}/>
     })
-    //console.log(cards);
   }
 
   return (

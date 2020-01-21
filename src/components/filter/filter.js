@@ -13,12 +13,6 @@ class filter extends Component {
     max: 40
   };
 
-  componentDidMount() {
-    console.log('chenaged?');
-
-    //this.setState({values: [this.props.temperature]})
-  }
-
   onChange = (values) => {
     this.setState({ values });
     let temperature = values[0];
@@ -100,7 +94,7 @@ class filter extends Component {
 
 function mapStateToProps(state) {
   return {
-    cities: state.cities
+    cities: state.cities,
   };
 }
 
