@@ -80,7 +80,7 @@ const config = {
       inject: false,
       template: require('html-webpack-template'),
       title: 'weather-filter',
-      links: ['https://fonts.googleapis.com/css?family=Open+Sans&display=swap'],
+      links: ['https://fonts.googleapis.com/css?family=Open+Sans&display=swap', 'https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css'],
       appMountId: 'app',
       scripts: ['https://maps.googleapis.com/maps/api/js?key=AIzaSyDYDyRJMJLyYF9fIpH51XZLaOt5mF9pyDY&libraries=places']
     })

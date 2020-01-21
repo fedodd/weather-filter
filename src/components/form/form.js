@@ -9,6 +9,9 @@ import './form.pcss';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions';
 
+
+const weatherbitKey = process.env.WEATHERBIT_KEY;
+
 class form extends Component {
   state = {
     placeholder: 'Воронеж',
@@ -49,6 +52,20 @@ class form extends Component {
   onSubmit(event){
 
     event.preventDefault();
+
+    // axios.get('api.openweathermap.org/data/2.5/weather', {
+    //   params: {
+    //     lat: this.state.currentCity.lat,
+    //     lon: this.state.currentCity.lng,
+    //     apikey: '6727cf84c6655a35d561de6c24a48499'
+    //   }
+    // }).then(res => {
+    //     console.log(res)
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   })
+
 
     axios.get('https://api.weatherbit.io/v2.0/current', {
         params: {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { weatherbitIcons } from '../../helpers/icons';
 import "./card.pcss";
 
 function card(props) {
@@ -10,7 +11,9 @@ function card(props) {
         {props.data.title}
       </h3>
       <div className="card-line">
-        <div className="card-icon">{props.data.icon}</div>
+        <div className="card-icon">{props.data.icon}
+           <i className={`wi ${weatherbitIcons[props.data.icon]}`} />
+        </div>
         <span >{props.data.temperature} &#176;C</span>
       </div>
       <p className="card-text">Ветер: {props.data.wind} м/с</p>
