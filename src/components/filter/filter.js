@@ -9,7 +9,7 @@ class filter extends Component {
     values: [0],
     finalValues: [10],
     step: 1,
-    min: -30,
+    min: -40,
     max: 40
   };
 
