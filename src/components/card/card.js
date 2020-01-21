@@ -11,8 +11,7 @@ function card(props) {
         {props.data.title}
       </h3>
       <div className="card-line">
-        <div className="card-icon">{props.data.icon}
-           <i className={`wi ${weatherbitIcons[props.data.icon]}`} />
+        <div className="card-icon"><i className={`wi ${weatherbitIcons[props.data.icon]}`} />
         </div>
         <span >{props.data.temperature} &#176;C</span>
       </div>

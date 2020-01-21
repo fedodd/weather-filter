@@ -60,8 +60,8 @@ function mapDispatchToProps(dispatch) {
   return {
     addCity: (city) => dispatch(
       actions.addCity(city)),
-    deleteCity: (city) => dispatch(
-      actions.deleteCity(city))
+    deleteCity: (city_name) => dispatch(
+      actions.deleteCity(city_name))
   };
 }
 

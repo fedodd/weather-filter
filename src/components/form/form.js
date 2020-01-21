@@ -16,6 +16,7 @@ class form extends Component {
   state = {
     placeholder: 'Воронеж',
     autocompletionRequest: {
+      language: 'ru',
       componentRestrictions: {
         country: 'ru'
       },

@@ -20,8 +20,13 @@ const reducer = (state = initialState, action) => {
       // eslint-disable-next-line no-case-declarations
       let index = state.cities.findIndex(city =>
           city.city_name === action.city_name);
+
       // eslint-disable-next-line no-case-declarations
-      let afterDeleteCities = state.cities.slice(1, index + 1);
+
+
+      let afterDeleteCities = [...state.cities];
+      afterDeleteCities.splice(index, 1);
+      console.log(state.cities, afterDeleteCities);
       return {
         ...state,
         cities: afterDeleteCities
