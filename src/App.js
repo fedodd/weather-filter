@@ -32,7 +32,6 @@ class App extends Component {
   render() {
 
     let cities = this.props.cities.filter(city => !city.isHide)
-    console.log('render app', this.props.cities, cities);
 
     return (
       <div className="App">
@@ -58,8 +57,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    addCity: (city) => dispatch(
-      actions.addCity(city)),
     deleteCity: (city_name) => dispatch(
       actions.deleteCity(city_name))
   };

@@ -14,6 +14,8 @@ const weatherbitKey = process.env.WEATHERBIT_KEY;
 
 class form extends Component {
   state = {
+    submitDisabled: true,
+    isReplay: false,
     placeholder: 'Воронеж',
     autocompletionRequest: {
       language: 'ru',
@@ -33,15 +35,17 @@ class form extends Component {
 
   onSelectCity(event) {
     //выбрав город сразу запрашиваем его координаты, еще до добавления в дэшборд
+
     geocodeByPlaceId(event.place_id)
       .then(results => {
         return getLatLng(results[0])})
       .then(({ lat, lng }) =>
         this.setState({
+          submitDisabled: false,
           currentCity: {
             lat, lng,
             title: event.structured_formatting.main_text,
-            id: event.place_id,
+            place_id: event.place_id,
             country: event.structured_formatting.secondary_text
           }
         })
@@ -67,7 +71,17 @@ class form extends Component {
     //     console.log(error);
     //   })
 
+    let checkCity = this.props.cities
+      .find(city =>
+        city.place_id === this.state.currentCity.place_id);
 
+    if (checkCity !== undefined) {
+      this.setState({isReplay: true});
+      setTimeout(() => {
+        this.setState({isReplay: false});
+      }, 3000);
+      return null;
+    }
     axios.get('https://api.weatherbit.io/v2.0/current', {
         params: {
           lat: this.state.currentCity.lat,
@@ -88,11 +102,10 @@ class form extends Component {
           wind: Math.round(data.wind_spd),
           pressure: pressure,
           icon: data.weather.icon,
-          isHide: false
+          isHide: false,
+          place_id: this.state.currentCity.place_id
         }
-
         this.props.addCity(city);
-
       })
       .catch(error => {
         console.log(error);
@@ -125,9 +138,11 @@ class form extends Component {
         />
         <button
           type="submit"
+          disabled={this.state.submitDisabled}
           className="submit">
           <span className="button  with__border"></span>
         </button>
+        {this.state.isReplay ? <p className="form-message">Такой город уже есть. Выберите другой.</p> : null}
       </form>
     );
   }
