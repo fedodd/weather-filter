@@ -5,6 +5,7 @@ import './App.pcss';
 import Dashboard from "./components/dashboard/dashboard";
 import Filter from "./components/filter/filter";
 import Form from "./components/form/form";
+import * as actions from './store/actions';
 
 import {
   createStore,
@@ -24,8 +25,14 @@ class App extends Component {
     }
   }
 
+  onCardClose = (city) => {
+    this.props.deleteCity(city);
+  }
+
   render() {
-    console.log('i am render');
+
+    let cities = this.props.cities.filter(city => !city.isHide)
+    console.log('render app', this.props.cities, cities);
 
     return (
       <div className="App">
@@ -36,7 +43,7 @@ class App extends Component {
           <Form />
           <Filter />
         </div>
-        <Dashboard cities={this.props.cities}/>
+        <Dashboard cities={cities} onCardClose={this.onCardClose}/>
       </div>
     );
   }
@@ -44,14 +51,17 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    cities: state.cities
+    cities: state.cities,
+    temperature: state.temperature
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     addCity: (city) => dispatch(
-      actions.addCity(city))
+      actions.addCity(city)),
+    deleteCity: (city) => dispatch(
+      actions.deleteCity(city))
   };
 }
 

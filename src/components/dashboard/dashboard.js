@@ -4,21 +4,19 @@ import Card from "../card/card";
 
 function dashboard(props) {
 
-
+  console.log('a em here', props);
 
   let cards = <p>Добавьте город для отлеживания температуры</p>;
-  console.log('dashboard i am render', props.cities);
 
   if (props.cities) {
-    console.log(props.cities);
-
     cards = props.cities.map(city => {
-      return <Card data={city} key={city.id}/>
+      return <Card
+        data={city}
+        key={city.id}
+        onCardClose={props.onCardClose}/>
     })
+    //console.log(cards);
   }
-
-  console.log(cards);
-
 
   return (
     <div className="dashboard">

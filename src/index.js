@@ -12,7 +12,6 @@ import store from "./store/store";
 import "regenerator-runtime/runtime";
 
 const ConnectedApp = connect((state) => {
-  console.log(state);
   return state;
 })(App);
 

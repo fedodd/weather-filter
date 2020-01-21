@@ -19,7 +19,7 @@ const reducer = (state = initialState, action) => {
     case 'DELETE_CITY':
       // eslint-disable-next-line no-case-declarations
       let index = state.cities.findIndex(city =>
-          city.city_name === action.city.city_name);
+          city.city_name === action.city_name);
       // eslint-disable-next-line no-case-declarations
       let afterDeleteCities = state.cities.slice(1, index + 1);
       return {
@@ -27,15 +27,18 @@ const reducer = (state = initialState, action) => {
         cities: afterDeleteCities
       };
     case 'FILTER_CITY':
+
+
       // eslint-disable-next-line no-case-declarations
       let filteredCities = state.cities.map(city => {
         (city.temperature < action.temperature) ?
           city.isHide = true : city.isHide = false;
-      })
-    return {
-      ...state,
-      cities: filteredCities
-    };
+        return city;
+      });
+      return {
+        ...state,
+
+      };
     default:
       return state;
   }

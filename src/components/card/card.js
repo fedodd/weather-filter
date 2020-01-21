@@ -8,7 +8,7 @@ function card(props) {
 
   return (
     <div className="card with__border">
-      <span className="card-close"></span>
+      <span className="card-close" onClick={event=> props.onCardClose(props.data.city_name)}></span>
       <h3 className="card-title">
         {props.data.title}
       </h3>

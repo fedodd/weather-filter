@@ -28,12 +28,9 @@ class form extends Component {
   }
 
   onSelectCity(event) {
-   console.log(event);
-
-
+    //выбрав город сразу запрашиваем его координаты, еще до добавления в дэшборд
     geocodeByPlaceId(event.place_id)
       .then(results => {
-        console.log(results);
         return getLatLng(results[0])})
       .then(({ lat, lng }) =>
         this.setState({

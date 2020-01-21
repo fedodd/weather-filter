@@ -15,14 +15,14 @@ export const updateData = (cities) => {
   }
 };
 
-export const DeleteCity = (city) => {
+export const deleteCity = (city_name) => {
   return {
     type: 'DELETE_CITY',
-    city: city
+    city_name: city_name
   }
 };
 
-export const FilterCity = (temperature) => {
+export const filterCity = (temperature) => {
   return {
     type: 'FILTER_CITY',
     temperature: temperature
