@@ -16,7 +16,7 @@ class form extends Component {
   state = {
     submitDisabled: true,
     isReplay: false,
-    placeholder: 'Воронеж',
+    placeholder: 'Город',
     autocompletionRequest: {
       language: 'ru',
       componentRestrictions: {
@@ -126,9 +126,12 @@ class form extends Component {
               {
                 suggestions.map((suggestion) => {
                   suggestion.descripiton = suggestion.structured_formatting.main_text;
-
                   return (
-                  <div className="suggestion" onClick={(event) => onSelectSuggestion(suggestion, event)}>
+                  <div
+                    onKeyDown={event => console.log(event)}
+                    className="suggestion"
+                    onClick={(event) => onSelectSuggestion(suggestion, event)}
+                    key={suggestion.place_id}>
                     {suggestion.structured_formatting.main_text}
                   </div>
                 )})
