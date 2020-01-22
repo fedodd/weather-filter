@@ -4,19 +4,21 @@ import { put, takeEvery, call } from 'redux-saga/effects'
 import * as actions from "./actions";
 import "regenerator-runtime/runtime";
 
-export function* watchFetchDog() {
-  yield takeEvery('FETCHED_DOG', fetchDogAsync);
+export function* watchFetchAutocomplete() {
+  console.log('FETCHED_AUTOCOMPLETE', fetchAutocompleteAsync);
+
+  yield takeEvery('FETCHED_AUTOCOMPLETE', fetchAutocompleteAsync);
 }
 
-function* fetchDogAsync() {
+function * fetchAutocompleteAsync() {
   try {
-    yield put(actions.requestDog());
+    yield put(actions.requestAutocomplete());
     const data = yield call(() => {
       return fetch('https://dog.ceo/api/breeds/image/random')
         .then(res => res.json())
     });
-    yield put(actions.requestDogSuccess(data));
+    yield put(actions.requestAutocompleteSuccess(data));
   } catch (error) {
-    yield put(actions.requestDogError());
+    yield put(actions.requestAutocompleteError());
   }
 }
