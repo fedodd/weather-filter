@@ -43,7 +43,7 @@ export const requestWeatherError = (city) => {
 };
 
 
-export const InitiateAutocomplete = () => {
+export const initiateAutocomplete = () => {
   console.log('InitiateAutocomplete');
 
   return { type: 'INITIATE_AUTOCOMPLETE' }

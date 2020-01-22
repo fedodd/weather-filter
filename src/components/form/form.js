@@ -128,7 +128,6 @@ class form extends Component {
                   suggestion.description = suggestion.structured_formatting.main_text;
                   return (
                   <div
-                    onKeyDown={event => console.log(event)}
                     className={ index === active ? "suggestion is__active" :"suggestion"}
                     onClick={(event) => onSelectSuggestion(suggestion, event)}
                     key={suggestion.place_id}>
@@ -145,7 +144,7 @@ class form extends Component {
           className="submit">
           <span className="button  with__border"></span>
         </button>
-        {this.state.isReplay ? <p className="form-message">Такой город уже есть. Выберите другой.</p> : null}
+        {this.state.isReplay ? <p className="form-message" onClick={this.props.initiateAutocomplete}>Такой город уже есть. Выберите другой.</p> : null}
       </form>
     );
   }
@@ -160,8 +159,12 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     addCity: (city) => dispatch(
-      actions.addCity(city))
-  };
+      actions.addCity(city)),
+    // selectCity: () => dispatch(
+    //   actions.initiateAutocomplete()),
+    // initiateAutocomplete: () => dispatch(
+    //   actions.initiateAutocomplete())
+  }
 }
 
 export default connect(
