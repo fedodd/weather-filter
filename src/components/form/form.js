@@ -13,6 +13,14 @@ import * as actions from '../../store/actions';
 const weatherbitKey = process.env.WEATHERBIT_KEY;
 
 class form extends Component {
+
+  constructor(props) {
+    super(props);
+    // создадим реф в поле `textInput` для хранения DOM-элемента
+    this.textInput = React.createRef();
+  }
+
+
   state = {
     submitDisabled: true,
     isReplay: false,
@@ -36,40 +44,32 @@ class form extends Component {
   onSelectCity(event) {
     //выбрав город сразу запрашиваем его координаты, еще до добавления в дэшборд
 
+    let city_name = event.structured_formatting.main_text;
+
+
     geocodeByPlaceId(event.place_id)
       .then(results => {
-        return getLatLng(results[0])})
-      .then(({ lat, lng }) =>
-        this.setState({
-          submitDisabled: false,
-          currentCity: {
-            lat, lng,
-            title: event.structured_formatting.main_text,
-            place_id: event.place_id,
-            country: event.structured_formatting.secondary_text
-          }
-        })
-      );
-
+        console.log('results', results);
+        city_name = results[0].address_components[0].long_name;
+        return getLatLng(results[0])
+      })
+        .then(({ lat, lng }) =>
+          this.setState({
+            submitDisabled: false,
+            currentCity: {
+              lat, lng,
+              title: city_name,
+              place_id: event.place_id,
+              country: event.structured_formatting.secondary_text
+            }
+          })
+        );
 
   }
 
   onSubmit(event){
 
     event.preventDefault();
-
-    // axios.get('api.openweathermap.org/data/2.5/weather', {
-    //   params: {
-    //     lat: this.state.currentCity.lat,
-    //     lon: this.state.currentCity.lng,
-    //     apikey: '6727cf84c6655a35d561de6c24a48499'
-    //   }
-    // }).then(res => {
-    //     console.log(res)
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   })
 
     let checkCity = this.props.cities
       .find(city =>
@@ -124,15 +124,15 @@ class form extends Component {
           renderSuggestions={(active, suggestions, onSelectSuggestion) => (
             <div className="suggestions-container">
               {
-                suggestions.map((suggestion) => {
-                  suggestion.descripiton = suggestion.structured_formatting.main_text;
+                suggestions.map((suggestion, index) => {
+                  suggestion.description = suggestion.structured_formatting.main_text;
                   return (
                   <div
                     onKeyDown={event => console.log(event)}
-                    className="suggestion"
+                    className={ index === active ? "suggestion is__active" :"suggestion"}
                     onClick={(event) => onSelectSuggestion(suggestion, event)}
                     key={suggestion.place_id}>
-                    {suggestion.structured_formatting.main_text}
+                    {suggestion.description}
                   </div>
                 )})
               }

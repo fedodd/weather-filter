@@ -1,17 +1,16 @@
 .form {
   position: relative;
+  z-index: 20;
   display: flex;
+  overflow: visible;
   flex-direction: row;
   margin-right: 100px;
-
-  & .suggestions-container {
-    background-color: red;
-  }
+  height: 60px;
 }
 
 .input {
   display: inline-block;
-  padding-left: 22px;
+  padding-left: var(--padding-input);
   box-sizing: border-box;
   width: 300px;
   height: 60px;
@@ -98,12 +97,21 @@
 
 .suggestions-container {
   position: relative;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: white;
+  box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.75);
+}
+
+.suggestion {
+  padding-left: var(--padding-input);
+  text-align: left;
 }
 
 .suggestion:hover {
   background-color: var(--color_light);
 }
 
-.suggestionActive {
+.suggestion.is__active {
   background: #e0e3e7;
 }
