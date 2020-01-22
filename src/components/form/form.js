@@ -160,8 +160,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     addCity: (city) => dispatch(
-      actions.addCity(city)),
-    fetchAutocomplete: () => dispatch(FetchAutocomplete())
+      actions.addCity(city))
   };
 }
 

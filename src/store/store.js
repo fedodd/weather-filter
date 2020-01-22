@@ -2,7 +2,7 @@
 import { createStore, applyMiddleware, compose  } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import reducer from "./reducer";
-import { watchFetchDog, watchFetchAutocomplete} from "./sagas";
+import { watchFetchDog, watchFetchAutocomplete, watchAddCity} from "./sagas";
 
 // Store
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -16,6 +16,6 @@ const store = createStore(
   )
 );
 
-sagaMiddleware.run(watchFetchAutocomplete);
+sagaMiddleware.run(watchAddCity);
 
 export default store;
