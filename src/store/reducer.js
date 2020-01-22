@@ -1,6 +1,7 @@
 // Reducer
 const initialState = {
   temperature: 0,
+  currentCity: {},
   cities: [
   ],
 };
@@ -9,7 +10,20 @@ const initialState = {
 const reducer = (state = initialState, action) => {
 
   switch (action.type) {
-    case 'ADD_CITY':
+    // case 'ADD_CITY':
+    //   // eslint-disable-next-line no-case-declarations
+    //   let updatedcities = state.cities.concat(action.city);
+    //   return {
+    //     ...state,
+    //     cities: updatedcities
+    //   };
+    case 'SELECT_CITY_SUCCESS':
+      // eslint-disable-next-line no-case-declarations
+      return {
+        ...state,
+        currentCity: action.city
+      };
+    case 'ADD_CITY_SUCCESS':
       // eslint-disable-next-line no-case-declarations
       let updatedcities = state.cities.concat(action.city);
       return {

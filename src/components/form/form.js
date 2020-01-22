@@ -14,13 +14,6 @@ const weatherbitKey = process.env.WEATHERBIT_KEY;
 
 class form extends Component {
 
-  constructor(props) {
-    super(props);
-    // создадим реф в поле `textInput` для хранения DOM-элемента
-    this.textInput = React.createRef();
-  }
-
-
   state = {
     submitDisabled: true,
     isReplay: false,
@@ -43,73 +36,45 @@ class form extends Component {
 
   onSelectCity(event) {
     //выбрав город сразу запрашиваем его координаты, еще до добавления в дэшборд
+    ;
+    // let city_name = event.structured_formatting.main_text;
 
-    let city_name = event.structured_formatting.main_text;
 
-
-    geocodeByPlaceId(event.place_id)
-      .then(results => {
-        console.log('results', results);
-        city_name = results[0].address_components[0].long_name;
-        return getLatLng(results[0])
-      })
-        .then(({ lat, lng }) =>
-          this.setState({
-            submitDisabled: false,
-            currentCity: {
-              lat, lng,
-              title: city_name,
-              place_id: event.place_id,
-              country: event.structured_formatting.secondary_text
-            }
-          })
-        );
-
+    // geocodeByPlaceId(event.place_id)
+    //   .then(results => {
+    //     city_name = results[0].address_components[0].long_name;
+    //     return getLatLng(results[0])
+    //   })
+    //     .then(({ lat, lng }) =>
+    //       this.setState({
+    //         submitDisabled: false,
+    //         currentCity: {
+    //           lat, lng,
+    //           title: city_name,
+    //           place_id: event.place_id,
+    //           country: event.structured_formatting.secondary_text
+    //         }
+    //       })
+    //     );
   }
 
   onSubmit(event){
-
     event.preventDefault();
 
+    //check if city is already added
     let checkCity = this.props.cities
       .find(city =>
         city.place_id === this.state.currentCity.place_id);
 
-    if (checkCity !== undefined) {
+    if (checkCity === undefined) {
+      this.props.addCity(this.state.currentCity);
+    } else {
+      //set message that city is already added
       this.setState({isReplay: true});
       setTimeout(() => {
         this.setState({isReplay: false});
       }, 3000);
-      return null;
     }
-    axios.get('https://api.weatherbit.io/v2.0/current', {
-        params: {
-          lat: this.state.currentCity.lat,
-          lon: this.state.currentCity.lng,
-          key: '70b14df4c065478e8ab5dfeb04ed8c83'
-        }
-      })
-      .then(response => {
-
-        let data = response.data.data[0];
-        // convert to mm Hg
-        let pressure = Math.round(data.pres * 0.750062);
-
-        let city = {
-          title: this.state.currentCity.title,
-          city_name: data.city_name,
-          temperature: Math.round(data.temp),
-          wind: Math.round(data.wind_spd),
-          pressure: pressure,
-          icon: data.weather.icon,
-          isHide: false,
-          place_id: this.state.currentCity.place_id
-        }
-        this.props.addCity(city);
-      })
-      .catch(error => {
-        console.log(error);
-      })
   }
 
   render() {
@@ -117,7 +82,7 @@ class form extends Component {
     return (
       <form className='form' onSubmit={e => this.onSubmit(e)}>
         <GooglePlacesAutocomplete
-          onSelect={event => this.onSelectCity(event)}
+          onSelect={e => this.props.selectCity(e)}
           placeholder={this.state.placeholder}
           inputClassName="input with__border"
           autocompletionRequest={this.state.autocompletionRequest}
@@ -144,7 +109,7 @@ class form extends Component {
           className="submit">
           <span className="button  with__border"></span>
         </button>
-        {this.state.isReplay ? <p className="form-message" onClick={this.props.initiateAutocomplete}>Такой город уже есть. Выберите другой.</p> : null}
+        {this.state.isReplay ? <p className="form-message">Такой город уже есть. Выберите другой.</p> : null}
       </form>
     );
   }
@@ -160,10 +125,8 @@ function mapDispatchToProps(dispatch) {
   return {
     addCity: (city) => dispatch(
       actions.addCity(city)),
-    // selectCity: () => dispatch(
-    //   actions.initiateAutocomplete()),
-    // initiateAutocomplete: () => dispatch(
-    //   actions.initiateAutocomplete())
+    selectCity: (city) => dispatch(
+      actions.selectCity(city)),
   }
 }
 
