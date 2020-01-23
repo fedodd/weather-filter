@@ -15,7 +15,6 @@ class filter extends Component {
   onChange = (values) => {
     this.setState({ values });
     let temperature = values[0];
-    this.props.filterCity(temperature);
   }
 
   render() {
@@ -31,20 +30,16 @@ class filter extends Component {
             onChange={values => this.onChange(values)}
             renderTrack={({ props, children }) => (
               <div
+                className='filter-box'
                 onMouseDown={props.onMouseDown}
                 onTouchStart={props.onTouchStart}
-                style={{
-                  ...props.style,
-                  height: '20px',
-                  display: 'flex',
-                  width: '100%'
-                }}
+
               ><span></span>
                 <div
+                  className='filter-track'
                   ref={props.ref}
                   style={{
-                    height: '3px',
-                    width: '100%',
+
                     background: getTrackBackground({
                       values: this.state.values,
                       colors: ['var(--color_light)', 'var(--color_dark)'],
