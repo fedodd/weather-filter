@@ -3,31 +3,34 @@ import { Range, getTrackBackground } from 'react-range';
 import { connect } from 'react-redux';
 import './filter.pcss';
 import * as actions from '../../store/actions';
+import debounce from 'lodash/debounce'
 
 class filter extends Component {
   state = {
     values: [0],
-    finalValues: [10],
     step: 1,
     min: -40,
     max: 40
   };
 
   onChange = (values) => {
-    this.setState({ values });
-    let temperature = values[0];
-    this.props.filterCity(temperature);
+    //make action only if value changed
+    if (values[0] !== this.state.values[0]) {
+      this.setState({
+        values
+      });
+      let temperature = values[0];
+      debounce(() => {
+        this.props.filterCity(temperature);
+      }, 200)();
+    }
   }
 
   render() {
     return (
       <div className="filter">
         <h2>Где сейчас теплее чем</h2>
-        <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            flexWrap: 'wrap'
-          }}>
+        <div className="filter-wrapper">
           <Range
             values={this.state.values}
             step={this.state.step}
@@ -36,20 +39,16 @@ class filter extends Component {
             onChange={values => this.onChange(values)}
             renderTrack={({ props, children }) => (
               <div
+                className='filter-box'
                 onMouseDown={props.onMouseDown}
                 onTouchStart={props.onTouchStart}
-                style={{
-                  ...props.style,
-                  height: '20px',
-                  display: 'flex',
-                  width: '100%'
-                }}
+
               ><span></span>
                 <div
+                  className='filter-track'
                   ref={props.ref}
                   style={{
-                    height: '3px',
-                    width: '100%',
+
                     background: getTrackBackground({
                       values: this.state.values,
                       colors: ['var(--color_light)', 'var(--color_dark)'],
@@ -73,10 +72,6 @@ class filter extends Component {
                   width: isDragged ? '10px' : '8px',
                   borderRadius: isDragged ? '6px' : '5px',
                   backgroundColor: isDragged ?  'var(--color_active)': 'var(--color_dark)',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  border: '1px solid white',
                   outlineColor: isDragged ?  'transparent': 'var(--color_dark)'
                 }}
               >
