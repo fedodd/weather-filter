@@ -4,7 +4,6 @@ import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { geocodeByAddress, getLatLng, geocodeByPlaceId } from 'react-google-places-autocomplete';
 // If you want to use the provided css
 import 'react-google-places-autocomplete/dist/assets/index.css';
-import Button from "../button/button";
 import './form.pcss';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions';

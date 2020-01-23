@@ -15,7 +15,7 @@ import axios  from 'axios';
 import * as actions from "./actions";
 import "regenerator-runtime/runtime";
 
-// sagas by course
+// saga add city
 
 export function* watchAddCity() {
   yield takeEvery('ADD_CITY_REQUEST', addCitySaga)
@@ -32,6 +32,8 @@ function* addCitySaga(action) {
         }
       })
     const data = apiData.data.data[0];
+
+    //convert pressure to russian mmHg
     let pressure = Math.round(data.pres * 0.750062);
     let city = {
       title: action.city.title,
@@ -49,6 +51,7 @@ function* addCitySaga(action) {
   }
 }
 
+// saga select city
 
 export function* watchSelectCity(action) {
   yield takeEvery('SELECT_CITY_REQUEST', selectCitySaga)
@@ -61,7 +64,8 @@ function* selectCitySaga(action) {
     const title = geoCode[0].address_components[0].long_name
     const {lat, lng} = yield getLatLng(geoCode[0]);
     const city = {
-      lat, lng,
+      lat,
+      lng,
       title,
       place_id: action.city.place_id,
       country: action.city.structured_formatting.secondary_text

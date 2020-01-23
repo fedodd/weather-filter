@@ -1,5 +1,4 @@
-// Action Creators
-
+// add city
 export const addCityRequest = (city) => {
   return {
     type: 'ADD_CITY_REQUEST',
@@ -21,6 +20,7 @@ export const addCityError = (error) => {
   }
 };
 
+//select city
 export const selectCityRequest = (city) => {
   return {
     type: 'SELECT_CITY_REQUEST',
@@ -42,8 +42,7 @@ export const selectCityError = (error) => {
   }
 };
 
-
-
+//delete city
 export const deleteCity = (city_name) => {
   return {
     type: 'DELETE_CITY',
@@ -51,63 +50,10 @@ export const deleteCity = (city_name) => {
   }
 };
 
+//filter city
 export const filterCity = (temperature) => {
   return {
     type: 'FILTER_CITY',
     temperature
-  }
-};
-
-
-export const initiateAutocomplete = () => {
-  console.log('InitiateAutocomplete');
-
-  return { type: 'INITIATE_AUTOCOMPLETE' }
-};
-
-export const requestAutocomplete = () => {
-  console.log('requestAutocomplete');
-
-  return { type: 'REQUESTED_AUTOCOMPLETE' }
-};
-
-export const requestAutocompleteSuccess = (data) => {
-  console.log('requestAutocompleteSuccess');
-  return {
-    type: 'REQUESTED_AUTOCOMPLETE_SUCCEEDED',
-    url: data.message
-  }
-};
-
-export const requestAutocompleteError = (city) => {
-  console.log('requestAutocompleteError');
-  return {
-    type: 'REQUEST_AUTOCOMPLETE_ERROR'
-  }
-};
-
-export const fetchAutocomplete = () => {
-  console.log('fetchAutocomplet');
-  return { type: 'FETCHED_AUTOCOMPLETE' }
-};
-
-
-
-export const requestWeather = () => {
-  return { type: 'REQUESTED_Weather' }
-};
-
-
-export const requestWeatherSuccess = (data) => {
-  return {
-    type: 'REQUESTED_WEATHER_SUCCEEDED',
-    url: data.message
-  }
-};
-
-export const requestWeatherError = (city) => {
-
-  return {
-    type: 'REQUEST_WEATHER_ERROR'
   }
 };

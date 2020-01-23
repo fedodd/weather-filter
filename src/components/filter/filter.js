@@ -7,7 +7,6 @@ import * as actions from '../../store/actions';
 class filter extends Component {
   state = {
     values: [0],
-    finalValues: [10],
     step: 1,
     min: -40,
     max: 40
@@ -23,11 +22,7 @@ class filter extends Component {
     return (
       <div className="filter">
         <h2>Где сейчас теплее чем</h2>
-        <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            flexWrap: 'wrap'
-          }}>
+        <div className="filter-wrapper">
           <Range
             values={this.state.values}
             step={this.state.step}
@@ -73,10 +68,6 @@ class filter extends Component {
                   width: isDragged ? '10px' : '8px',
                   borderRadius: isDragged ? '6px' : '5px',
                   backgroundColor: isDragged ?  'var(--color_active)': 'var(--color_dark)',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  border: '1px solid white',
                   outlineColor: isDragged ?  'transparent': 'var(--color_dark)'
                 }}
               >

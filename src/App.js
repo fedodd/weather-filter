@@ -15,20 +15,6 @@ import createSagaMiddleware from 'redux-saga';
 
 class App extends Component {
 
-  state = {
-    placeholder: 'Воронеж',
-    autocompletionRequest: {
-      componentRestrictions: {
-        country: 'ru'
-      },
-       types: ['(cities)'],
-    }
-  }
-
-  onCardClose = (city) => {
-    this.props.deleteCity(city);
-  }
-
   render() {
 
     let cities = this.props.cities.filter(city => !city.isHide)
@@ -42,7 +28,7 @@ class App extends Component {
           <Form />
           <Filter />
         </div>
-        <Dashboard cities={cities} onCardClose={this.onCardClose}/>
+        <Dashboard cities={cities} onCardClose={this.props.deleteCity}/>
       </div>
     );
   }
@@ -58,8 +44,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     deleteCity: (city_name) => dispatch(
-      actions.deleteCity(city_name)),
-    fetchAutocomplete: () => dispatch(FetchAutocomplete())
+      actions.deleteCity(city_name))
   };
 }
 

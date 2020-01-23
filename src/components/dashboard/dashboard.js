@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import "./dashboard.pcss";
 import Card from "../card/card";
 
 function dashboard(props) {
 
-  let cards = <p>Добавьте город для отлеживания температуры</p>;
+  let cards = <p>Добавьте город для отcлеживания температуры</p>;
 
   if (props.cities) {
     cards = props.cities.map(city => {
