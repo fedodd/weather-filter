@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const config = {
   entry: [
@@ -75,6 +76,7 @@ const config = {
     contentBase: './dist'
   },
   plugins: [
+    new Dotenv(),
     new LodashModuleReplacementPlugin,
     new HtmlWebpackPlugin({
       inject: false,
@@ -82,7 +84,7 @@ const config = {
       title: 'weather-filter',
       links: ['https://fonts.googleapis.com/css?family=Open+Sans&display=swap', 'https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css'],
       appMountId: 'app',
-      scripts: ['https://maps.googleapis.com/maps/api/js?key=AIzaSyDYDyRJMJLyYF9fIpH51XZLaOt5mF9pyDY&libraries=places&language=ru']
+      scripts: ['https://maps.googleapis.com/maps/api/js?key=' + process.env.GOOGLE_PLACES_API_KEY + '&libraries=places&language=ru']
     })
   ],
   optimization: {

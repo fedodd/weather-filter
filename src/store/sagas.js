@@ -28,7 +28,7 @@ function* addCitySaga(action) {
         params: {
           lat: action.city.lat,
           lon: action.city.lng,
-          key: '70b14df4c065478e8ab5dfeb04ed8c83'
+          key: process.env.WEATHERBIT_KEY
         }
       })
     const data = apiData.data.data[0];
