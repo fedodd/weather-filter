@@ -3,6 +3,7 @@ import { Range, getTrackBackground } from 'react-range';
 import { connect } from 'react-redux';
 import './filter.pcss';
 import * as actions from '../../store/actions';
+import debounce from 'lodash/debounce'
 
 class filter extends Component {
   state = {
@@ -13,8 +14,16 @@ class filter extends Component {
   };
 
   onChange = (values) => {
-    this.setState({ values });
-    let temperature = values[0];
+    //make action only if value changed
+    if (values[0] !== this.state.values[0]) {
+      this.setState({
+        values
+      });
+      let temperature = values[0];
+      debounce(() => {
+        this.props.filterCity(temperature);
+      }, 200)();
+    }
   }
 
   render() {
