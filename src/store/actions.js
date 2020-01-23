@@ -1,8 +1,8 @@
 // Action Creators
 
-export const addCity = (city) => {
+export const addCityRequest = (city) => {
   return {
-    type: 'ADD_CITY',
+    type: 'ADD_CITY_REQUEST',
     city
   }
 };
@@ -21,17 +21,17 @@ export const addCityError = (error) => {
   }
 };
 
-export const selectCity = (city) => {
+export const selectCityRequest = (city) => {
   return {
-    type: 'SELECT_CITY',
-    city: city
+    type: 'SELECT_CITY_REQUEST',
+    city
   }
 };
 
 export const selectCitySuccess = (city) => {
   return {
     type: 'SELECT_CITY_SUCCESS',
-    city: city
+    city
   }
 };
 
@@ -47,14 +47,14 @@ export const selectCityError = (error) => {
 export const deleteCity = (city_name) => {
   return {
     type: 'DELETE_CITY',
-    city_name: city_name
+    city_name
   }
 };
 
 export const filterCity = (temperature) => {
   return {
     type: 'FILTER_CITY',
-    temperature: temperature
+    temperature
   }
 };
 

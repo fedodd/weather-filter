@@ -15,7 +15,6 @@ const weatherbitKey = process.env.WEATHERBIT_KEY;
 class form extends Component {
 
   state = {
-    submitDisabled: true,
     isReplay: false,
     placeholder: 'Город',
     autocompletionRequest: {
@@ -25,37 +24,6 @@ class form extends Component {
       },
       types: ['(cities)'],
     },
-    currentCity: {
-      lat: null,
-      lng: null,
-      title: null,
-      place_id: null
-    },
-    weather: null
-  }
-
-  onSelectCity(event) {
-    //выбрав город сразу запрашиваем его координаты, еще до добавления в дэшборд
-    ;
-    // let city_name = event.structured_formatting.main_text;
-
-
-    // geocodeByPlaceId(event.place_id)
-    //   .then(results => {
-    //     city_name = results[0].address_components[0].long_name;
-    //     return getLatLng(results[0])
-    //   })
-    //     .then(({ lat, lng }) =>
-    //       this.setState({
-    //         submitDisabled: false,
-    //         currentCity: {
-    //           lat, lng,
-    //           title: city_name,
-    //           place_id: event.place_id,
-    //           country: event.structured_formatting.secondary_text
-    //         }
-    //       })
-    //     );
   }
 
   onSubmit(event){
@@ -64,10 +32,10 @@ class form extends Component {
     //check if city is already added
     let checkCity = this.props.cities
       .find(city =>
-        city.place_id === this.state.currentCity.place_id);
+        city.place_id === this.props.currentCity.place_id);
 
     if (checkCity === undefined) {
-      this.props.addCity(this.state.currentCity);
+      this.props.addCity(this.props.currentCity);
     } else {
       //set message that city is already added
       this.setState({isReplay: true});
@@ -105,7 +73,7 @@ class form extends Component {
         />
         <button
           type="submit"
-          disabled={this.state.submitDisabled}
+          disabled={this.props.submitDisabled}
           className="submit">
           <span className="button  with__border"></span>
         </button>
@@ -117,16 +85,18 @@ class form extends Component {
 
 function mapStateToProps(state) {
   return {
-    cities: state.cities
+    cities: state.cities,
+    currentCity: state.currentCity,
+    submitDisabled: state.submitDisabled
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     addCity: (city) => dispatch(
-      actions.addCity(city)),
+      actions.addCityRequest(city)),
     selectCity: (city) => dispatch(
-      actions.selectCity(city)),
+      actions.selectCityRequest(city)),
   }
 }
 

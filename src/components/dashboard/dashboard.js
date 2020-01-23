@@ -10,7 +10,7 @@ function dashboard(props) {
     cards = props.cities.map(city => {
       return <Card
         data={city}
-        key={city.id}
+        key={city.place_id}
         onCardClose={props.onCardClose}/>
     })
   }

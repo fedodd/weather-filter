@@ -18,7 +18,7 @@ import "regenerator-runtime/runtime";
 // sagas by course
 
 export function* watchAddCity() {
-  yield takeEvery('ADD_CITY', addCitySaga)
+  yield takeEvery('ADD_CITY_REQUEST', addCitySaga)
 }
 
 function* addCitySaga(action) {
@@ -51,35 +51,24 @@ function* addCitySaga(action) {
 
 
 export function* watchSelectCity(action) {
-  yield takeEvery('SELECT_CITY', selectCitySaga)
+  yield takeEvery('SELECT_CITY_REQUEST', selectCitySaga)
 }
 
 function* selectCitySaga(action) {
-  try {
-    const geoCode = yield  geocodeByPlaceId(action.city.place_id);
-    const title = geoCode[0].address_components[0].long_name
-    const {lat, lng} = yield getLatLng(results[0]);
 
-    yield put(actions.selectCitySuccess({
+  try {
+    const geoCode = yield geocodeByPlaceId(action.city.place_id);
+    const title = geoCode[0].address_components[0].long_name
+    const {lat, lng} = yield getLatLng(geoCode[0]);
+    const city = {
       lat, lng,
       title,
       place_id: action.city.place_id,
       country: action.city.structured_formatting.secondary_text
-    }))
+    };
+
+    yield put(actions.selectCitySuccess(city))
   } catch (error) {
     yield put(actions.selectCityError(error))
   }
 }
-
-
-
-// export function* watchcSelectCity() {
-//   console.log('in watch');
-
-//   yield takeEvery('INITIATE_AUTOCOMPLETE', addSelectSaga)
-// }
-
-// function* addSelectSaga(action) {
-//   yield console.log('first yield in selet')
-//   yield put(actions.fetchAutocomplete);
-// }

@@ -1,9 +1,10 @@
 // Reducer
 const initialState = {
-  temperature: 0,
+  initTemperature: 0,
   currentCity: {},
   cities: [
   ],
+  submitDisabled: true
 };
 
 
@@ -18,9 +19,9 @@ const reducer = (state = initialState, action) => {
     //     cities: updatedcities
     //   };
     case 'SELECT_CITY_SUCCESS':
-      // eslint-disable-next-line no-case-declarations
       return {
         ...state,
+        submitDisabled: false,
         currentCity: action.city
       };
     case 'ADD_CITY_SUCCESS':
