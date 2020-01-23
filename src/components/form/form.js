@@ -76,7 +76,7 @@ class form extends Component {
           className="submit">
           <span className="button  with__border"></span>
         </button>
-        {this.state.isReplay ? <p className="form-message">Такой город уже есть. Выберите другой.</p> : null}
+        {this.state.isReplay ? <span className="form-message">Такой город уже есть. Выберите другой.</span> : null}
       </form>
     );
   }
