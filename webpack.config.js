@@ -2,6 +2,12 @@ const webpack = require('webpack');
 const path = require('path');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
+
+//add env in webpack config
+const fs = require('fs')
+const dotenv = require('dotenv')
+const envConfig = dotenv.parse(fs.readFileSync('.env'))
 
 const config = {
   entry: [
@@ -75,13 +81,17 @@ const config = {
     contentBase: './dist'
   },
   plugins: [
+    new Dotenv({
+
+    }),
     new LodashModuleReplacementPlugin,
     new HtmlWebpackPlugin({
       inject: false,
       template: require('html-webpack-template'),
-      links: ['https://fonts.googleapis.com/css?family=Open+Sans&display=swap'],
+      title: 'weather-filter',
+      links: ['https://fonts.googleapis.com/css?family=Open+Sans&display=swap', 'https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css'],
       appMountId: 'app',
-      scripts: ['https://maps.googleapis.com/maps/api/js?key=AIzaSyDYDyRJMJLyYF9fIpH51XZLaOt5mF9pyDY&libraries=places']
+      scripts: ['https://maps.googleapis.com/maps/api/js?key=' + envConfig.GOOGLE_PLACES_API_KEY + '&libraries=places&language=ru']
     })
   ],
   optimization: {

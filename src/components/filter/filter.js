@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
 import { Range, getTrackBackground } from 'react-range';
-import './filter.pcss'
+import { connect } from 'react-redux';
+import './filter.pcss';
+import * as actions from '../../store/actions';
 
 class filter extends Component {
   state = {
-    values: [10],
+    values: [0],
     finalValues: [10],
     step: 1,
-    min: -30,
+    min: -40,
     max: 40
   };
 
-
+  onChange = (values) => {
+    this.setState({ values });
+    let temperature = values[0];
+    this.props.filterCity(temperature);
+  }
 
   render() {
     return (
@@ -27,7 +33,7 @@ class filter extends Component {
             step={this.state.step}
             min={this.state.min}
             max={this.state.max}
-            onChange={values => this.setState({ values })}
+            onChange={values => this.onChange(values)}
             renderTrack={({ props, children }) => (
               <div
                 onMouseDown={props.onMouseDown}
@@ -86,4 +92,19 @@ class filter extends Component {
   }
 }
 
-export default filter;
+function mapStateToProps(state) {
+  return {
+    cities: state.cities,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    filterCity: (temperature) => dispatch(
+      actions.filterCity(temperature))
+  };
+}
+
+export default connect(
+  mapStateToProps, mapDispatchToProps
+)(filter);

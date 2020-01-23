@@ -1,30 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import "./dashboard.pcss";
 import Card from "../card/card";
 
 function dashboard(props) {
 
-  let data = {
-    city: "Москва",
-    temperature: 3,
-    wind: 5,
-    pressure: 752,
-    icon: ''
-  }
+  let cards = <p>Добавьте город для отлеживания температуры</p>;
 
-    let data2 = {
-    city: "Санкт-Петербург",
-    temperature: -3,
-    wind: 7,
-    pressure: 732,
-    icon: ''
+  if (props.cities) {
+    cards = props.cities.map(city => {
+      return <Card
+        data={city}
+        key={city.place_id}
+        onCardClose={props.onCardClose}/>
+    })
   }
 
   return (
     <div className="dashboard">
-      <Card data={data}/>
-      <Card data={data2}/>
-      <Card data={data}/>
+      {cards}
     </div>
   );
 }
