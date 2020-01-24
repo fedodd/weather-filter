@@ -1,16 +1,20 @@
 .App {
-
-
   --font-size_big: 25px;
   --font-size_title: 16px;
   --font-size_title_small: 14px;
   --font-size_text: 12px;
-
+  /* 50, 100, 300, 500, 700, 900  */
+  /* --color_backgound_air: #eeeeee;
   --color_main: #cacaca;
   --color_light: #e2e2e2;
   --color_dark: #707070;
-  --color_active: black;
-  --color_backgound_air: #eeeeee;
+  --color_active: black; */
+
+  --color_backgound_air: #fff3e0;
+  --color_main: #ffb74d;
+  --color_light: #ffe0b2;
+  --color_dark: #f57c00;
+  --color_active: #e65100;
 
   --padding-big: 25px;
   --padding-small: 10px;
@@ -18,12 +22,10 @@
   --padding-middle: 16px;
   --padding-input: 22px;
 
-
   margin: 0 auto;
   width: 80vw;
   text-align: center;
   color: black;
-
 }
 
 .App-header {
@@ -33,7 +35,7 @@
   align-items: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  background-color: #282c34;
+  background-color: var(--color_active);
 }
 
 .App-controls {
