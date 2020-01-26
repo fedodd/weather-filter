@@ -43,10 +43,10 @@ export const selectCityError = (error) => {
 };
 
 //delete city
-export const deleteCity = (city_name) => {
+export const deleteCity = (place_id) => {
   return {
     type: 'DELETE_CITY',
-    city_name
+    place_id
   }
 };
 
