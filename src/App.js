@@ -43,8 +43,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    deleteCity: (city_name) => dispatch(
-      actions.deleteCity(city_name))
+    deleteCity: (place_id) => dispatch(
+      actions.deleteCity(place_id))
   };
 }
 

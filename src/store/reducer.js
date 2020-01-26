@@ -6,7 +6,6 @@ const initialState = {
   submitDisabled: true
 };
 
-
 const reducer = (state = initialState, action) => {
 
   switch (action.type) {
@@ -23,11 +22,11 @@ const reducer = (state = initialState, action) => {
         cities: updatedcities
       };
     case 'DELETE_CITY':
-      let index = state.cities.findIndex(city =>
-          city.city_name === action.city_name);
-
+      let index = state.cities
+        .findIndex(city => city.place_id === action.place_id);
       let afterDeleteCities = [...state.cities];
-      afterDeleteCities.splice(index, 1);
+      //if suddenly there is no city with such id index findIndex return -1 and we didn't want to delete last elem in array
+      index === -1 ? null : afterDeleteCities.splice(index, 1);
       return {
         ...state,
         cities: afterDeleteCities
@@ -42,7 +41,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         filteredCities
-
       };
     default:
       return state;
