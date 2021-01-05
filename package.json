@@ -13,7 +13,7 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "axios": "^0.19.1",
+    "axios": "^0.21.1",
     "dotenv-webpack": "^1.7.0",
     "lodash": "^4.17.15",
     "normalize.css": "^8.0.1",
